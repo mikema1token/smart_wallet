@@ -37,7 +37,7 @@ func main() {
 }
 
 func ListeningEoAddress() {
-	dialer := websocket.Dialer{}
+	dialer := GetWebSocketDial()
 	websocketDialer := rpc.WithWebsocketDialer(dialer)
 	url := config.EtherTest
 	if !config.Test {
@@ -105,6 +105,15 @@ func GetProxyHttpClient() *http.Client {
 	}
 	proxyUrl, _ := url.Parse(config.HttpProxyUrl)
 	return &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyUrl)}}
+}
+func GetWebSocketDial() websocket.Dialer {
+	if !config.HttpProxy {
+		return websocket.Dialer{}
+	}
+	dialer := websocket.Dialer{}
+	proxyUrl, _ := url.Parse(config.HttpProxyUrl)
+	dialer.Proxy = http.ProxyURL(proxyUrl)
+	return dialer
 }
 
 type Config struct {

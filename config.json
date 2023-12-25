@@ -1,5 +1,5 @@
 {
-  "test": true,
+  "test": false,
   "http_proxy": true,
   "http_proxy_url": "http://127.0.0.1:7890",
   "tg_bot_token": "6344780345:AAHqHVVHicYEpS_8iot0tKYpNPklOui8_P0",
