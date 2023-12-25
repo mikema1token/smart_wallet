@@ -103,18 +103,19 @@ func GetProxyHttpClient() *http.Client {
 	if !config.HttpProxy {
 		return http.DefaultClient
 	}
-	proxyUrl, _ := url.Parse("http://127.0.0.1:7890")
+	proxyUrl, _ := url.Parse(config.HttpProxyUrl)
 	return &http.Client{Transport: &http.Transport{Proxy: http.ProxyURL(proxyUrl)}}
 }
 
 type Config struct {
-	Test       bool     `json:"test"`
-	TgBotToken string   `json:"tg_bot_token"`
-	EtherMain  string   `json:"ether_main"`
-	EtherTest  string   `json:"ether_test"`
-	Address    []string `json:"address"`
-	ChatId     string   `json:"chat_id"`
-	HttpProxy  bool     `json:"http_proxy"`
+	Test         bool     `json:"test"`
+	TgBotToken   string   `json:"tg_bot_token"`
+	EtherMain    string   `json:"ether_main"`
+	EtherTest    string   `json:"ether_test"`
+	Address      []string `json:"address"`
+	ChatId       string   `json:"chat_id"`
+	HttpProxy    bool     `json:"http_proxy"`
+	HttpProxyUrl string   `json:"http_proxy_url"`
 }
 
 func init() {

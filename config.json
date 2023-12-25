@@ -1,6 +1,7 @@
 {
   "test": true,
   "http_proxy": true,
+  "http_proxy_url": "http://127.0.0.1:7890",
   "tg_bot_token": "6344780345:AAHqHVVHicYEpS_8iot0tKYpNPklOui8_P0",
   "ether_main": "wss://mainnet.infura.io/ws/v3/4c5f1e3c98844323b9e4149228f3ce21",
   "ether_test": "wss://goerli.infura.io/ws/v3/4c5f1e3c98844323b9e4149228f3ce21",
