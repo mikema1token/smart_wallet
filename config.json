@@ -1,0 +1,9 @@
+{
+  "test": true,
+  "http_proxy": true,
+  "tg_bot_token": "6344780345:AAHqHVVHicYEpS_8iot0tKYpNPklOui8_P0",
+  "ether_main": "wss://mainnet.infura.io/ws/v3/4c5f1e3c98844323b9e4149228f3ce21",
+  "ether_test": "wss://goerli.infura.io/ws/v3/4c5f1e3c98844323b9e4149228f3ce21",
+  "address": ["0x0493db89cc71e229051529209dcd0ee8b17d3dc5","0x1bd953b21a0d1ed1a6de09421d99b19372c053b7"],
+  "chat_id": "-1002143648402"
+}
