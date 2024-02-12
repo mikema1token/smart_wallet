@@ -48,8 +48,9 @@ func ListeningEoAddress() {
 		panic(err)
 	}
 	newClient := ethclient.NewClient(client)
-	go ListenEvent(newClient, true)
-	go ListenEvent(newClient, false)
+
+	go LoopListen(newClient, true)
+	go LoopListen(newClient, false)
 	for log := range pushLogChan {
 		PushLogToTg(log)
 	}
@@ -71,13 +72,12 @@ func ListenEvent(client *ethclient.Client, from bool) error {
 		filterQuery.Topics = append(filterQuery.Topics, nil)
 		filterQuery.Topics = append(filterQuery.Topics, topicFilter)
 	}
-
 	logSubscribe, err := client.SubscribeFilterLogs(context.Background(), filterQuery, pushLogChan)
 	if err != nil {
-		panic(err)
+		return err
 	}
 	err = <-logSubscribe.Err()
-	panic(err)
+	return err
 }
 
 func PushLogToTg(log types.Log) {
@@ -167,4 +167,16 @@ func PushMessageToTg(message string) {
 	if err != nil {
 		SimpleLog(err.Error())
 	}
+}
+
+func LoopListen(client *ethclient.Client, from bool) {
+	go func() {
+		for {
+			err := ListenEvent(client, from)
+			if err != nil {
+				PushMessageToTg(fmt.Sprintf("%v", err))
+			}
+			time.Sleep(time.Minute)
+		}
+	}()
 }
